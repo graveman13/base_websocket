@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 import { UserList } from "./UserList";
-import { socket } from '../../../api/index'
+import socket from '../../../api/index'
 import userApi from '../../../api/user'
+import {
+  useLocation
+} from "react-router-dom";
 
 export const UserContainer = () => {
   const [users, setUsers] = useState([])
+  let location = useLocation();
 
   useEffect(() => {
-    // socket.emit('getAllUsers')
-    // socket.on('user/getAllUsers', (userList) => {
-    //   setUsers(userList)
-    // })
-    const users = userApi.getAllUsersApi();
-    console.log(users)
-    setUsers(userApi.getAllUsersApi());
+    socket.emit('getAllUsers')
+    socket.on('user/getAllUsers', (userList) => {
+      setUsers(userList)
+    })
   }, []);
+
+  // useEffect(() => {
+  //   const get = async () => {
+  //     const users = await userApi.getAllUsersApi();
+  //     setUsers(users);
+  //   }
+  //   get();
+  // }, [])
 
   return (
     <div>

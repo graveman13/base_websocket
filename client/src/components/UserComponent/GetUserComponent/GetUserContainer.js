@@ -15,8 +15,9 @@ export const GetUserContainer = () => {
   }
 
   const getUserById = (userId) => {
-    const response = userApi.getAllUsersApi(User);
-    setUser(response);
+    const user = userApi.getUserByIdApi(userId);
+    console.log(user)
+    setUser(user);
   }
 
   return (

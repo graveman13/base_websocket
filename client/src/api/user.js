@@ -1,21 +1,23 @@
-import  socket from './'
+import socket from './'
 
-const getAllUsersApi =  () => {
-  console.log(socket)
+const getAllUsersApi = async () => {
   let users = []
-   socket.emit('getAllUsers')
-   socket.on('user/getAllUsers', (userList) => {
+  await socket.emit('getAllUsers')
+  await socket.on('user/getAllUsers', (userList) => {
     users = userList
+    console.log(userList)
   })
   return users;
 }
 
 const getUserByIdApi = (userId) => {
-  let response = {}
+  let user = {}
   socket.emit('user/getUser', userId, (response) => {
-    response = { ...response };
+    user = response
+    console.log(user)
   })
-  return response
+  console.log(user)
+  return user
 }
 
 const addUserApi = (userData) => {
