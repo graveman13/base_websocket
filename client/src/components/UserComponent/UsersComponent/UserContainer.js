@@ -10,20 +10,17 @@ export const UserContainer = () => {
   const [users, setUsers] = useState([])
   let location = useLocation();
 
-  useEffect(() => {
-    socket.emit('getAllUsers')
-    socket.on('user/getAllUsers', (userList) => {
-      setUsers(userList)
-    })
-  }, []);
-
   // useEffect(() => {
-  //   const get = async () => {
-  //     const users = await userApi.getAllUsersApi();
-  //     setUsers(users);
-  //   }
-  //   get();
-  // }, [])
+  //   socket.emit('getAllUsers')
+  //   socket.on('user/getAllUsers', (userList) => {
+  //     setUsers(userList)
+  //   })
+  // }, []);
+
+  useEffect(() => {
+    const users = userApi.getAllUsersApi();
+    setUsers(users);
+  }, [])
 
   return (
     <div>
