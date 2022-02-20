@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import { UpdateUser } from "./UpdateUser"
+import userApi from '../../../api/user';
 
-export const UpdateUserContainer = ({ socket }) => {
+export const UpdateUserContainer = () => {
   const [userData, setUserData] = useState({});
   const [resp, setRespon] = useState('');
 
-  const sendUser =  (userData) => {
-     socket.emit('user/updateUser',userData,(response)=>{
-      setRespon(response);
-    })
+  const sendUser = (userData) => {
+    const response = userApi.updateUserApi(userData);
+    setRespon(response);
   }
   const handlerAddText = ({ target }) => {
     const { name, value } = target;
@@ -23,6 +23,6 @@ export const UpdateUserContainer = ({ socket }) => {
   }
 
   return (
-    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} resp={resp}/>
+    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} resp={resp} />
   )
 }

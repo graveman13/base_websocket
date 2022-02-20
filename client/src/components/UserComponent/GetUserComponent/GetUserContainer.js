@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { GetUser } from './GetUser';
+import userApi from "../../../api/user";
+import { User } from "../UsersComponent/User";
 
-export const GetUserContainer = ({ socket }) => {
+export const GetUserContainer = () => {
   const [userId, setUserId] = useState({});
   const [user, setUser] = useState({});
 
@@ -12,10 +14,9 @@ export const GetUserContainer = ({ socket }) => {
     getUserById(userId)
   }
 
-  const getUserById = async (userId) => {
-    await socket.emit('user/getUser', userId, (response) => {
-      setUser({ ...response });
-    })
+  const getUserById = (userId) => {
+    const response = userApi.getAllUsersApi(User);
+    setUser(response);
   }
 
   return (

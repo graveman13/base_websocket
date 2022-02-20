@@ -9,7 +9,7 @@ const styles = {
   display: "flex",
   height: '100vh'
 }
-const socket = io("http://localhost:5000");
+//const socket = io("http://localhost:5000");
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
   return (
     <div style={styles} >
       <Sidebar />
-      <MainContent socket={socket} />
+      <MainContent  />
     </div>
   );
 }

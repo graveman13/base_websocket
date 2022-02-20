@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { DeleteUser } from './DeleteUser'
+import userApi from "../../../api/user";
 
-export const DeleteUserContainer = ({ socket }) => {
+export const DeleteUserContainer = () => {
   const [deleteUserId, setDeleteUserId] = useState({});
   const [user, setUser] = useState({});
 
@@ -9,12 +10,11 @@ export const DeleteUserContainer = ({ socket }) => {
     setDeleteUserId({ id: value });
   }
   const handleDeleteUserBtn = () => {
-    sendDeleteUser();
+    sendDeleteUser(deleteUserId);
   }
-  const sendDeleteUser = async (userId) => {
-    await socket.emit('user/deleteUser', deleteUserId, (response) => {
-      setUser({ ...response });
-    })
+  const sendDeleteUser = (userId) => {
+    const response = userApi.deleteUserByIdApi(userId);
+    setUser({ ...response });
   }
 
   return (

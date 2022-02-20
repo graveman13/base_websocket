@@ -1,10 +1,10 @@
-import { socket } from './'
+import  socket from './'
 
-const getAllUsersApi = async () => {
+const getAllUsersApi =  () => {
   console.log(socket)
   let users = []
-  await socket.emit('getAllUsers')
-  await socket.on('user/getAllUsers', (userList) => {
+   socket.emit('getAllUsers')
+   socket.on('user/getAllUsers', (userList) => {
     users = userList
   })
   return users;
