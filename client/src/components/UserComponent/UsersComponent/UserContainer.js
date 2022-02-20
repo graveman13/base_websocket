@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { UserList } from "./UserList";
 
-export const UserContainer = () => {
-  const users = [{ name: 'nqme', surname: '12', status: 'oj' }, { name: 'nqme', surname: '12', status: 'oj' }];
+export const UserContainer = ({ socket }) => {
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    socket.emit('getAllUsers')
+    socket.on('user/getAllUsers', (userList) => {
+      setUsers(userList)
+    })
+  },[]);
+
   return (
-    <UserList users={users} />
+    <div>
+      {!!users.length ? < UserList users={users} /> : <div>1</div>}
+    </div>
   )
 }

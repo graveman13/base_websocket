@@ -1,20 +1,25 @@
 import { useState } from "react"
+import { DeleteUser } from './DeleteUser'
 
-export const DeleteUser = () => {
+export const DeleteUserContainer = ({ socket }) => {
   const [deleteUserId, setDeleteUserId] = useState({});
+  const [user, setUser] = useState({});
 
-  const handleText = ({ target: { name, value } }) => {
-    setDeleteUserId({ [name]: value });
+  const handleText = ({ target: { value } }) => {
+    setDeleteUserId({ id: value });
   }
   const handleDeleteUserBtn = () => {
     sendDeleteUser();
   }
-  const sendDeleteUser = () => {
-    console.log(deleteUserId);
+  const sendDeleteUser = async (userId) => {
+    await socket.emit('user/deleteUser', deleteUserId, (response) => {
+      setUser({ ...response });
+    })
   }
+
   return (
-    <di>
-      <DeleteUser handleText={handleText} handleDeleteUserBtn={handleDeleteUserBtn} />
-    </di>
+    <div>
+      <DeleteUser handleText={handleText} handleDeleteUserBtn={handleDeleteUserBtn} user={user} />
+    </div>
   )
 }

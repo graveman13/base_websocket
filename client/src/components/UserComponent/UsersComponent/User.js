@@ -1,5 +1,5 @@
-export const User = ({ user: { name, surname, status } }) => {
+export const User = ({ user: { userName, userSurname, status } }) => {
   return (
-    <div>{`${name} ${surname} ${status}`}</div>
+    <div>{`${userName} ${userSurname} ${status}`}</div>
   )
 }

@@ -1,11 +1,17 @@
-export const AddUser = ({ handlerText, UpdateUser }) => {
+const styles = {
+  display: "flex",
+  flexDirection:'column',
+}
+
+export const UpdateUser = ({ handlerText, handlerUpdateBtn,resp }) => {
   return (
-    <div>
+    <div style={styles}>
       <input type='text' placeholder="User id" name='userId' onChange={(e) => handlerText(e)} />
       <input type='text' placeholder="User name" name='userName' onChange={(e) => handlerText(e)} />
       <input type='text' placeholder="User surname" name='userSurname' onChange={(e) => handlerText(e)} />
       <input type='text' placeholder="User status" name='status' onChange={(e) => handlerText(e)} />
-      <button onClick={UpdateUser}>Update user</button>
+      <button onClick={handlerUpdateBtn}>Update user</button>
+      <div>{resp}</div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { UserContainer } from './AddUserComponent';
+import { UserContainer } from './UsersComponent';
 import { AddUserContainer } from './AddUserComponent';
 import { DeleteUserContainer } from './DeleteUserComponent';
 import { UpdateUserContainer } from './UpdateUserComponent';

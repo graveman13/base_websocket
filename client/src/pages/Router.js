@@ -1,17 +1,16 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { AddUserContainer, UserContainer } from '../components/UserComponent';
 
-import { UserContainer, AddUserContainer, DeleteUserContainer, GetUserContainer, UpdateUserContainer } from '../components';
-import { UserContainer } from '../components';
-export const Router = ({ children }) => {
+import { AddUserPage, DeleteUserPage, GetUserPage, UpdateUserPage, UsersPage } from './index';
+
+export const Router = ({ socket }) => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/users" element={<UserContainer />} />
-        <Route path="/get_user" element={<GetUserContainer />} />
-        <Route path="/add_user" element={<AddUserContainer />} />
-        <Route path="/update_user" element={<UpdateUserContainer />} />
-        <Route path="/delete_user" element={<GetUserContainer />} />
-      </Routes>
-    </BrowserRouter>
-  )
-}
+    <Routes>
+      <Route path="/users" element={<UsersPage socket={socket} />} />
+      <Route path="/get_user" element={<GetUserPage socket={socket} />} />
+      <Route path="/add_user" element={<AddUserPage socket={socket} />} />
+      <Route path="/update_user" element={<UpdateUserPage socket={socket} />} />
+      <Route path="/delete_user" element={<DeleteUserPage socket={socket} />} />
+    </Routes>
+  );
+};

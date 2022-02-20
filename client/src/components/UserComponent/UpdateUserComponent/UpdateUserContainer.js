@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 
 import { UpdateUser } from "./UpdateUser"
 
-export const UpdateUserContainer = () => {
+export const UpdateUserContainer = ({ socket }) => {
   const [userData, setUserData] = useState({});
+  const [resp, setRespon] = useState('');
 
-  const sendUser = (userData) => {
-    setUserData(userData);
+  const sendUser =  (userData) => {
+     socket.emit('user/updateUser',userData,(response)=>{
+      setRespon(response);
+    })
   }
   const handlerAddText = ({ target }) => {
     const { name, value } = target;
@@ -16,11 +19,10 @@ export const UpdateUserContainer = () => {
   }
 
   const handlerUpdateBtn = () => {
-    console.log(userData)
     sendUser(userData);
   }
 
   return (
-    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} />
+    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} resp={resp}/>
   )
 }

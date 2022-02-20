@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { AddUser } from "./AddUser"
 
-export const AddUserContainer = () => {
+export const AddUserContainer = ({ socket }) => {
   const [userData, setUserData] = useState({});
 
-  const sendUser = (userData) => {
-    setUserData(userData);
+  const sendUser = async (userData) => {
+    await socket.emit('user/addUser', userData);
   }
   const handlerAddText = ({ target }) => {
     const { name, value } = target;
@@ -16,7 +16,6 @@ export const AddUserContainer = () => {
   }
 
   const handlerAddBtn = () => {
-    console.log(userData)
     sendUser(userData);
   }
 

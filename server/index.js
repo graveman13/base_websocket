@@ -1,7 +1,8 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { servicesHandler } from './src/services/index.js'
 
-const httpServer  = createServer()
+const httpServer = createServer()
 
 const io = new Server(httpServer, {
   cors: {
@@ -9,10 +10,12 @@ const io = new Server(httpServer, {
   }
 })
 const onConnection = (socket) => {
-  log('User connected')
+  console.log('User connected')
+
+  servicesHandler(socket);
 
   socket.on('disconnect', () => {
-    log('User disconnected')
+    console.log('User disconnected')
   })
 }
 

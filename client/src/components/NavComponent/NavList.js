@@ -5,7 +5,7 @@ export const NavList = ({ navItems }) => {
     <>
       {
         navItems.map((nav, index) => (
-          <div><Nav /></div>
+          <div  key={index}><Nav nav={nav}/></div>
         ))
       }
     </>

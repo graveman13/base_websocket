@@ -1,4 +1,4 @@
-import { addUser, deleteUser, getAllUsers, getUser, updateUser } from '../dao/index'
+import { addUser, deleteUser, getAllUsers, getUser, updateUser } from '../dao/index.js'
 
 export const getAllUsersService = () => {
   return getAllUsers();
@@ -15,9 +15,3 @@ export const updateUserService = (id, userData) => {
 export const deleteUserService = (id) => {
   return deleteUser(id)
 }
-
-socket.emit('getAllUsers', getAllUsersService);
-socket.on('getUser', getUserService);
-socket.on('addUser');
-socket.on('updateUser');
-socket.on('deleteUser');
