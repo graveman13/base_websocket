@@ -5,6 +5,7 @@ const getAllUsersApi = () => {
   socket.emit('getAllUsers');
   socket.on('user/getAllUsers', (userList) => {
     users = userList
+    console.log(userList)
   })
   console.log(users)
   return users;
