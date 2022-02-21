@@ -5,16 +5,15 @@ const getAllUsersApi = () => {
   socket.emit('getAllUsers');
   socket.on('user/getAllUsers', (userList) => {
     users = userList
-    console.log(userList)
   })
+  console.log(users)
   return users;
 }
 
 const getUserByIdApi = (userId) => {
-  let user = {}
+  let user = {};
   socket.emit('user/getUser', userId, (response) => {
     user = response
-    console.log(user)
   })
   console.log(user)
   return user
