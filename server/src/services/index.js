@@ -2,34 +2,35 @@
 import { addUserService, deleteUserService, getAllUsersService, getUserService, updateUserService } from './UserServices.js';
 
 export const servicesHandler = (socked) => {
-  socked.on('getAllUsers', () => {
+  socked.on(GET_USERS, () => {
     console.info('get all users', getAllUsersService())
-    socked.emit('user/getAllUsers', getAllUsersService());
+    socked.emit(GET_ALL_USERS, getAllUsersService());
   })
 
-  socked.on('user/addUser', (userData) => {
+  socked.on(ADD_USER, (userData) => {
     addUserService(userData);
     console.info('add user', userData)
     socked.broadcast.emit('user/getAllUsers', getAllUsersService());
   });
 
-  socked.on('user/deleteUser', (userId, callback) => {
+  socked.on(DELETE_USER, (userId, callback) => {
     const user = deleteUserService(userId.id);
     console.info('delete user', user)
     socked.broadcast.emit('user/getAllUsers', getAllUsersService());
     callback({ status: 'ok', ...user });
   });
 
-  socked.on('user/getUser', (userId, callback) => {
+  socked.on(GET_USER, (userId, callback) => {
     const user = getUserService(userId.id);
     console.info('get user', user)
     callback({ status: 'ok', ...user });
   })
 
-  socked.on('user/updateUser', (dataUser, callback) => {
+  socked.on(UPDATE_USER, (dataUser, callback) => {
     updateUserService(dataUser.userId, dataUser);
     console.info('update user', dataUser.userId)
     socked.broadcast.emit('user/getAllUsers', getAllUsersService());
-    callback(`user update${dataUser.userId}`);
+    const updateUser = JSON.stringify(getUserService(dataUser.userId))
+    callback(`user by id${dataUser.userId} update. User data ${updateUser}`);
   })
 }

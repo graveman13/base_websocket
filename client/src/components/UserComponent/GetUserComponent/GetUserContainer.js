@@ -2,10 +2,13 @@ import { useEffect, useState } from "react"
 import { GetUser } from './GetUser';
 import userApi from "../../../api/user";
 import { User } from "../UsersComponent/User";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserThunk } from "../../../redux/thunk/userThunks";
 
 export const GetUserContainer = () => {
   const [userId, setUserId] = useState({});
-  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  const { getUser: user } = useSelector(state => state.userReducer)
 
   const handleText = ({ target: { value } }) => {
     setUserId({ id: value });
@@ -15,10 +18,9 @@ export const GetUserContainer = () => {
   }
 
   const getUserById = (userId) => {
-    const user = userApi.getUserByIdApi(userId);
-    console.log(user)
-    setUser(user);
+    dispatch(getUserThunk(userId));
   }
+
 
   return (
     <div>

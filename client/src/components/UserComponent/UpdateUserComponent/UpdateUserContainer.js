@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
 import { UpdateUser } from "./UpdateUser"
-import userApi from '../../../api/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUserThunk } from '../../../redux/thunk/userThunks';
 
 export const UpdateUserContainer = () => {
   const [userData, setUserData] = useState({});
-  const [resp, setRespon] = useState('');
+  const dispatch = useDispatch();
+  const { updateUser } = useSelector(state => state.userReducer);
 
   const sendUser = (userData) => {
-    const response = userApi.updateUserApi(userData);
-    setRespon(response);
+    dispatch(updateUserThunk(userData));
   }
   const handlerAddText = ({ target }) => {
     const { name, value } = target;
@@ -23,6 +24,6 @@ export const UpdateUserContainer = () => {
   }
 
   return (
-    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} resp={resp} />
+    <UpdateUser handlerText={handlerAddText} handlerUpdateBtn={handlerUpdateBtn} user={updateUser} />
   )
 }

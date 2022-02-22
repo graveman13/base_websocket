@@ -25,7 +25,7 @@ export const getDeleteUserAction = (payload) => {
     payload,
   }
 }
-export const getAddUserAction = (payload) => {
+export const addUserAction = (payload) => {
   return {
     type: ADD_USER,
     payload,

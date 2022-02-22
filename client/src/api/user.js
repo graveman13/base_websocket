@@ -1,43 +1,42 @@
 import socket from './'
+import { GET_USERS, GET_ALL_USERS, GET_USER, ADD_USER, UPDATE_USER, DELETE_USER } from '../../../common';
 
 const getAllUsersApi = () => {
-  let users = []
-  const resp = (usersList) => {
-    console.log(usersList)
-    users = usersList;
-  }
-  socket.emit('getAllUsers');
-  socket.on('user/getAllUsers', resp);
-  return users;
+  return new Promise(resolve => {
+    socket.emit(GET_USERS);
+    socket.on(GET_ALL_USERS, (usersList) => resolve(usersList));
+  })
 }
 
 const getUserByIdApi = (userId) => {
-  let user = {};
-  socket.emit('user/getUser', userId, (response) => {
-    user = response
+  return new Promise(resolve => {
+    socket.emit(GET_USER, userId, (userResponse) => {
+      resolve(userResponse);
+    })
   })
-  console.log(user)
-  return user
 }
 
 const addUserApi = (userData) => {
-  socket.emit('user/addUser', userData);
+  return new Promise(resolve => {
+    socket.emit(ADD_USER, userData);
+    resolve(userData);
+  })
 }
 
 const updateUserApi = (userData) => {
-  let resp = ''
-  socket.emit('user/updateUser', userData, (response) => {
-    resp = response;
+  return new Promise(resolve => {
+    socket.emit(UPDATE_USER, userData, (userResponse) => {
+      resolve(userResponse);
+    })
   })
-  return resp;
 }
 
 const deleteUserByIdApi = (deleteUserId) => {
-  let resp = {}
-  socket.emit('user/deleteUser', deleteUserId, (response) => {
-    resp = { ...response };
-  });
-  return resp;
+  return new Promise(resolve => {
+    socket.emit(DELETE_USER, deleteUserId, (userData) => {
+      resolve(userData);
+    });
+  })
 }
 
 const userApi = {

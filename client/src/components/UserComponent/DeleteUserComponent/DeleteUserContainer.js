@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUserThunk } from "../../../redux/thunk/userThunks";
 import { DeleteUser } from './DeleteUser'
-import userApi from "../../../api/user";
 
 export const DeleteUserContainer = () => {
   const [deleteUserId, setDeleteUserId] = useState({});
-  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  const { deleteUser } = useSelector(state => state.userReducer);
 
   const handleText = ({ target: { value } }) => {
     setDeleteUserId({ id: value });
@@ -13,13 +15,12 @@ export const DeleteUserContainer = () => {
     sendDeleteUser(deleteUserId);
   }
   const sendDeleteUser = (userId) => {
-    const response = userApi.deleteUserByIdApi(userId);
-    setUser({ ...response });
+    dispatch(deleteUserThunk(userId));
   }
 
   return (
     <div>
-      <DeleteUser handleText={handleText} handleDeleteUserBtn={handleDeleteUserBtn} user={user} />
+      <DeleteUser handleText={handleText} handleDeleteUserBtn={handleDeleteUserBtn} user={deleteUser} />
     </div>
   )
 }

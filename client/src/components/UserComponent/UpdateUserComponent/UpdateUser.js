@@ -3,7 +3,7 @@ const styles = {
   flexDirection:'column',
 }
 
-export const UpdateUser = ({ handlerText, handlerUpdateBtn,resp }) => {
+export const UpdateUser = ({ handlerText, handlerUpdateBtn,user }) => {
   return (
     <div style={styles}>
       <input type='text' placeholder="User id" name='userId' onChange={(e) => handlerText(e)} />
@@ -11,7 +11,7 @@ export const UpdateUser = ({ handlerText, handlerUpdateBtn,resp }) => {
       <input type='text' placeholder="User surname" name='userSurname' onChange={(e) => handlerText(e)} />
       <input type='text' placeholder="User status" name='status' onChange={(e) => handlerText(e)} />
       <button onClick={handlerUpdateBtn}>Update user</button>
-      <div>{resp}</div>
+      <div>{JSON.stringify(user)}</div>
     </div>
   )
 }
