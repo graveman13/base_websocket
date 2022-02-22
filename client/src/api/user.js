@@ -2,12 +2,12 @@ import socket from './'
 
 const getAllUsersApi = () => {
   let users = []
-  const resp = (usersList) => {
-    console.log(usersList)
-    users = usersList;
-  }
   socket.emit('getAllUsers');
-  socket.on('user/getAllUsers', resp);
+  socket.on('user/getAllUsers', (usersList) => {
+    users = usersList;
+    console.log('in callback', users);
+  }); 
+  console.log('out callback', users);
   return users;
 }
 
