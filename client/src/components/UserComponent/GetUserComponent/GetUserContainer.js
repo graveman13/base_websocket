@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { GetUser } from './GetUser';
-import userApi from "../../../api/user";
-import { User } from "../UsersComponent/User";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk } from "../../../redux/thunk/userThunks";
 

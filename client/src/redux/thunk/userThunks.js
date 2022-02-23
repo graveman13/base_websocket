@@ -1,33 +1,38 @@
-import userApi from "../../api/user";
 import { getAllUsersAction, addUserAction, getDeleteUserAction, getUpdateUserAction, getUserAction } from '../actions/actionsUser'
+import socket from '../../api/index';
 
 export const getAllUserThunk = () => {
-  return async (dispatch) => {
-    const users = await userApi.getAllUsersApi();
-    dispatch(getAllUsersAction(users));
+  return (dispatch) => {
+    socket.emit('getAllUsers');
+    socket.on('user/getAllUsers', (usersList) => {
+      dispatch(getAllUsersAction(usersList))
+    });
   };
 };
 export const getUserThunk = (userId) => {
-  return async (dispatch) => {
-    const user = await userApi.getUserByIdApi(userId);
-    dispatch(getUserAction(user));
+  return (dispatch) => {
+    socket.emit('user/getUser', userId, (userResponse) => {
+      dispatch(getUserAction(userResponse));
+    });
   };
 };
 export const deleteUserThunk = (userId) => {
-  return async (dispatch) => {
-    const user = await userApi.deleteUserByIdApi(userId);
-    dispatch(getDeleteUserAction(user));
+  return (dispatch) => {
+    socket.emit('user/deleteUser', userId, (userData) => {
+      dispatch(getDeleteUserAction(userData));
+    });
   };
 };
 export const updateUserThunk = (userData) => {
-  return async (dispatch) => {
-    const user = await userApi.updateUserApi(userData);
-    dispatch(getUpdateUserAction(user));
+  return (dispatch) => {
+    socket.emit('user/updateUser', userData, (userResponse) => {
+      dispatch(getUpdateUserAction(userResponse));
+    })
   };
 };
 export const addUserThunk = (userData) => {
   return async (dispatch) => {
-    const user = await userApi.addUserApi(userData);
-    dispatch(addUserAction(user));
+    socket.emit('user/addUser', userData);
+    dispatch(addUserAction(userData));
   };
 };

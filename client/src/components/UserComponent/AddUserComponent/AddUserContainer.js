@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserThunk } from '../../../redux/thunk/userThunks';
 
@@ -25,6 +25,6 @@ export const AddUserContainer = () => {
   }
 
   return (
-    <AddUser handlerText={handlerAddText} handlerSend={handlerAddBtn} user={addUser}/>
+    <AddUser handlerText={handlerAddText} handlerSend={handlerAddBtn} user={addUser} />
   )
 }
