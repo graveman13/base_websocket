@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUserThunk } from '../../../redux/thunk/userThunks';
+import { useSelector } from 'react-redux';
+import SocketApi from '../../../api/Socket/SocketClass';
 
 import { AddUser } from "./AddUser"
 
 export const AddUserContainer = () => {
   const [userData, setUserData] = useState({});
-  const dispatch = useDispatch();
   const { addUser } = useSelector(state => state.userReducer);
 
   const sendUser = (userData) => {
-    dispatch(addUserThunk(userData));
+    SocketApi.addUserApi(userData);
   }
 
   const handlerAddText = ({ target }) => {
@@ -25,6 +24,6 @@ export const AddUserContainer = () => {
   }
 
   return (
-    <AddUser handlerText={handlerAddText} handlerSend={handlerAddBtn} user={addUser}/>
+    <AddUser handlerText={handlerAddText} handlerSend={handlerAddBtn} user={addUser} />
   )
 }

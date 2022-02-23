@@ -1,33 +1,27 @@
-import userApi from "../../api/user";
 import { getAllUsersAction, addUserAction, getDeleteUserAction, getUpdateUserAction, getUserAction } from '../actions/actionsUser'
 
-export const getAllUserThunk = () => {
+export const getAllUserThunk = (usersList) => {
   return async (dispatch) => {
-    const users = await userApi.getAllUsersApi();
-    dispatch(getAllUsersAction(users));
+    dispatch(getAllUsersAction(usersList));
   };
 };
 export const getUserThunk = (userId) => {
   return async (dispatch) => {
-    const user = await userApi.getUserByIdApi(userId);
-    dispatch(getUserAction(user));
+    dispatch(getUserAction(userId));
   };
 };
-export const deleteUserThunk = (userId) => {
+export const deleteUserThunk = (userData) => {
   return async (dispatch) => {
-    const user = await userApi.deleteUserByIdApi(userId);
-    dispatch(getDeleteUserAction(user));
+    dispatch(getDeleteUserAction(userData));
   };
 };
 export const updateUserThunk = (userData) => {
   return async (dispatch) => {
-    const user = await userApi.updateUserApi(userData);
-    dispatch(getUpdateUserAction(user));
+    dispatch(getUpdateUserAction(userData));
   };
 };
 export const addUserThunk = (userData) => {
   return async (dispatch) => {
-    const user = await userApi.addUserApi(userData);
-    dispatch(addUserAction(user));
+    dispatch(addUserAction(userData));
   };
 };

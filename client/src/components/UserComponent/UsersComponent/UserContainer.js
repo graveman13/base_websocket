@@ -1,16 +1,14 @@
 import { useEffect } from "react";
 import { UserList } from "./UserList";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllUserThunk } from "../../../redux/thunk/userThunks";
+import { useSelector } from "react-redux";
+import SocketApi from "../../../api/Socket/SocketClass";
 
 export const UserContainer = () => {
   const { users } = useSelector(state => state.userReducer);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllUserThunk());
-  }, [dispatch])
-
+    SocketApi.getAllUsersApi();
+  }, [])
 
   return (
     <div>

@@ -4,15 +4,14 @@ import { Sidebar } from './layout/Sidebar.js';
 import { Router } from './pages/Router';
 import { io } from "socket.io-client";
 import { useEffect, useRef } from 'react';
+import { SocketClass } from './api/Socket/SocketClass';
 
 const styles = {
   display: "flex",
   height: '100vh'
 }
-//const socket = io("http://localhost:5000");
 
 function App() {
-
 
   return (
     <div style={styles} >

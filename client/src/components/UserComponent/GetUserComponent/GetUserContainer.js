@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { GetUser } from './GetUser';
-import userApi from "../../../api/user";
-import { User } from "../UsersComponent/User";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserThunk } from "../../../redux/thunk/userThunks";
+import { useSelector } from "react-redux";
+import SocketApi from "../../../api/Socket/SocketClass";
 
 export const GetUserContainer = () => {
   const [userId, setUserId] = useState({});
-  const dispatch = useDispatch();
   const { getUser: user } = useSelector(state => state.userReducer)
 
   const handleText = ({ target: { value } }) => {
@@ -18,9 +15,8 @@ export const GetUserContainer = () => {
   }
 
   const getUserById = (userId) => {
-    dispatch(getUserThunk(userId));
+    SocketApi.getUserByIdApi(userId);
   }
-
 
   return (
     <div>
