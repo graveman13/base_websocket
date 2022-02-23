@@ -10,7 +10,7 @@ export const servicesHandler = (socked) => {
   socked.on('user/addUser', (userData) => {
     addUserService(userData);
     console.info('add user', userData)
-    socked.emit('user/getAllUsers', getAllUsersService());
+    socked.broadcast.emit('user/getAllUsers', getAllUsersService());
   });
 
   socked.on('user/deleteUser', (userId, callback) => {
